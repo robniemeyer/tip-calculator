@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const managerValue = document.getElementById('manager-value');
     const waiterValue = document.getElementById('waiter-value');
     const grossProfitError = document.getElementById('gross-profit-input-error');
-
     let debounceTimer;
 
     grossProfitInput.addEventListener('input', formatBRL);
@@ -50,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         let tax = 0;
-
+        
         if (includeTaxCheckbox.checked) {
             const taxRate = 0.20;
             tax = grossProfitValue * taxRate;
