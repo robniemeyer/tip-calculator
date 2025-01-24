@@ -49,6 +49,7 @@ h1 {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    width: 100%;
 }
 
 .checkbox-group input[type=checkbox] {
@@ -62,6 +63,8 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -73,6 +76,7 @@ button:hover {
     background: #f9f9f9;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    width: 100%;
 }
 
 .result-group {
