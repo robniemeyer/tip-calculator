@@ -1,38 +1,57 @@
 body {
     font-family: sans-serif;
-    margin: 20px;
+    margin: 10px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-input {
+
+h1 {
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+input, button {
     font-family: sans-serif;
-    padding: 5px;
     margin: 10px 0;
+    padding: 10px;
     width: 100%;
+    max-width: 300px;
     box-sizing: border-box;
 }
-.flex-container {
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.result-group {
     display: flex;
     justify-content: space-between;
-}
-.flex-container label, .flex-container input, .flex-container span {
-    flex: 1;
-    margin: 5px;
-}
-button {
-    font-family: sans-serif;
-    padding: 5px 10px;
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
     margin: 10px 0;
-    cursor: pointer;
+    background: #f9f9f9;
+    border-radius: 5px;
 }
-.loading {
-    font-style: italic;
-    color: gray;
+
+.result-group div {
+    font-size: 16px;
 }
+
 @media only screen and (max-width: 600px) {
-    body {
-        margin: 10px;
-    }
-    .flex-container {
-        flex-direction: column;
-        align-items: flex-start;
+    input, button {
+        max-width: 100%;
     }
 }
