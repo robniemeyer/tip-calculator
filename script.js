@@ -18,16 +18,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function formatBRL(event) {
         let input = event.target;
-        let value = input.value.replace(/[\D]+/g, ''); 
+        let value = input.value.replace(/[^\d]/g, '');  // Remove everything except digits
 
-        if (value === '') {
+        if (!value) {
             input.value = '';
             return;
         }
 
-        let formattedValue = (parseInt(value, 10) / 100).toFixed(2).replace('.', ',');
-        formattedValue = formattedValue.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-        input.value = `R$ ${formattedValue}`;
+        value = (parseInt(value, 10) / 100).toFixed(2).replace('.', ',');  // Format the value
+        input.value = `R$ ${value}`;
 
         debounceCalculateTip();
     }
@@ -38,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function calculateTip() {
-        const inputValue = grossProfitInput.value.replace(/[R$ \.]/g, '').replace(',', '.');
-        const grossProfitValue = parseFloat(inputValue);
+        const inputValue = grossProfitInput.value.replace(/[R$ \.,]/g, '');
+        const grossProfitValue = parseFloat(inputValue) / 100;
 
         if (isNaN(grossProfitValue) || grossProfitValue <= 0) {
             grossProfitError.innerText = "Por favor, insira um valor válido de lucro bruto.";
