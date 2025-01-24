@@ -12,6 +12,13 @@ h1 {
     margin: 20px 0;
 }
 
+.input-group, .result-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+}
+
 input, button {
     font-family: sans-serif;
     margin: 10px 0;
@@ -29,12 +36,6 @@ button {
     border-radius: 5px;
 }
 
-input-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .result-group {
     display: flex;
     justify-content: space-between;
@@ -48,6 +49,11 @@ input-group {
 
 .result-group div {
     font-size: 16px;
+}
+
+.loading {
+    font-style: italic;
+    color: gray;
 }
 
 @media only screen and (max-width: 600px) {
