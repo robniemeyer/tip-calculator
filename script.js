@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let debounceTimer;
 
     grossProfitInput.addEventListener('input', formatBRL);
+    includeTaxCheckbox.addEventListener('change', calculateTip);
     document.getElementById('clear-button').addEventListener('click', clearInput);
 
     function debounceCalculateTip() {
@@ -19,14 +20,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function formatBRL(event) {
         let input = event.target;
-        let value = input.value.replace(/[^\d]/g, '');
+        let value = input.value.replace(/[^\d]/g, '');  // Remove everything except digits
 
         if (!value) {
             input.value = '';
             return;
         }
 
-        value = (parseInt(value, 10) / 100).toFixed(2).replace('.', ',');
+        value = (parseInt(value, 10) / 100).toFixed(2).replace('.', ',');  // Format the value
         input.value = `R$ ${value}`;
 
         debounceCalculateTip();
@@ -66,6 +67,5 @@ document.addEventListener('DOMContentLoaded', function() {
         waiterValue.innerText = waiterShare.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     }
 
-    grossProfitInput.addEventListener('keyup', () => debounceCalculateTip());
     calculateTip();
 });
