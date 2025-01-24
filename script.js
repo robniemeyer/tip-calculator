@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function formatBRL(event) {
         let input = event.target;
-        let value = input.value.replace(/[^\d]/g, '');
+        let value = input.value.replace(/[^\d]/g, '');  // Remove everything except digits
 
         if (!value) {
             input.value = '';
