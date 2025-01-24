@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Gorjeta</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        input {
+            font-family: sans-serif;
+            padding: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Gorjeta</h1>
+    <hr />
+    <div id="gross-profit">
+        <label for="gross-profit-value">Lucro Bruto: R$</label>
+        <input id="gross-profit-value" type="number" placeholder="Digite o lucro bruto" oninput="debounceCalculateTip()" aria-describedby="gross-profit-input-error" />
+        <div id="gross-profit-input-error" aria-live="assertive"></div>
+    </div>
+    <div id="tax">20% Imposto (exceto domingos e feriados): R$ <span id="tax-value">R$ 0,00</span></div>
+    <hr />
+    <div id="net-profit">Lucro Líquido: R$ <span id="net-profit-value">R$ 0,00</span></div>
+    <div id="manager">10% Gerente: R$ <span id="manager-value">R$ 0,00</span></div>
+    <div id="waiter">90% Garçom: R$ <span id="waiter-value">R$ 0,00</span></div>
+
+    <script>
+        let debounceTimer;
+        function debounceCalculateTip() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(calculateTip, 300);
+        }
+        
+        function calculateTip() {
+            const grossProfitInput = document.getElementById('gross-profit-value');
+            const grossProfitValue = parseFloat(grossProfitInput.value);
+            const grossProfitError = document.getElementById('gross-profit-input-error');
+
+            if (isNaN(grossProfitValue) || grossProfitValue <= 0) {
+                grossProfitError.innerText = "Por favor, insira um valor válido de lucro bruto.";
+                return;
+            } else {
+                grossProfitError.innerText = "";
+            }
+
+            const taxRate = 0.20;
+            const tax = grossProfitValue * taxRate;
+            document.getElementById('tax-value').innerText = tax.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+            const netProfit = grossProfitValue - tax;
+            document.getElementById('net-profit-value').innerText = netProfit.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+            const managerShare = netProfit * 0.10;
+            const waiterShare = netProfit * 0.90;
+            document.getElementById('manager-value').innerText = managerShare.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            document.getElementById('waiter-value').innerText = waiterShare.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+    </script>
+</body>
+</html>
