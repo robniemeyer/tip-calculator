@@ -62,3 +62,7 @@ function calculateTip() {
 
     showLoading(false);
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('gross-profit-value').addEventListener('keyup', debounceCalculateTip);
+});
