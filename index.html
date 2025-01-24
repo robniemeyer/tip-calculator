@@ -21,7 +21,7 @@
     <hr />
     <div id="gross-profit">
         <label for="gross-profit-value">Lucro Bruto: R$</label>
-        <input id="gross-profit-value" type="number" placeholder="Digite o lucro bruto" oninput="debounceCalculateTip()" aria-describedby="gross-profit-input-error" />
+        <input id="gross-profit-value" type="text" placeholder="Digite o lucro bruto" oninput="formatBRL(this)" aria-describedby="gross-profit-input-error" />
         <div id="gross-profit-input-error" aria-live="assertive"></div>
     </div>
     <div id="tax">20% Imposto (exceto domingos e feriados): R$ <span id="tax-value">R$ 0,00</span></div>
@@ -36,10 +36,23 @@
             clearTimeout(debounceTimer);
             debounceTimer = setTimeout(calculateTip, 300);
         }
+
+        function formatBRL(input) {
+            const value = parseFloat(input.value.replace(/[^\d]/g, ''));
+            if (!isNaN(value)) {
+                input.value = value.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                });
+                debounceCalculateTip(); // Update calculations based on formatted input
+            } else {
+                input.value = '';
+            }
+        }
         
         function calculateTip() {
             const grossProfitInput = document.getElementById('gross-profit-value');
-            const grossProfitValue = parseFloat(grossProfitInput.value);
+            const grossProfitValue = parseFloat(grossProfitInput.value.replace(/[^\d,]-/g, '').replace(',', '.'));
             const grossProfitError = document.getElementById('gross-profit-input-error');
 
             if (isNaN(grossProfitValue) || grossProfitValue <= 0) {
