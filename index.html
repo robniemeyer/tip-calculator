@@ -26,11 +26,11 @@
         <input id="gross-profit-value" type="text" placeholder="Digite o lucro bruto" onkeyup="formatBRL(this)" aria-describedby="gross-profit-input-error"/>
         <div id="gross-profit-input-error" aria-live="assertive"></div>
     </div>
-    <div id="tax">20% Imposto (exceto domingos e feriados): <span id="tax-value">0,00</span></div>
+    <div id="tax">20% Imposto (exceto domingos e feriados): <span id="tax-value">R$ 0,00</span></div>
     <hr/>
-    <div id="net-profit">Lucro Líquido: <span id="net-profit-value">0,00</span></div>
-    <div id="manager">10% Gerente: <span id="manager-value">0,00</span></div>
-    <div id="waiter">90% Garçom: <span id="waiter-value">0,00</span></div>
+    <div id="net-profit">Lucro Líquido: <span id="net-profit-value">R$ 0,00</span></div>
+    <div id="manager">10% Gerente: <span id="manager-value">R$ 0,00</span></div>
+    <div id="waiter">90% Garçom: <span id="waiter-value">R$ 0,00</span></div>
 
     <script>
         let debounceTimer;
@@ -43,7 +43,7 @@
             let value = input.value.replace(/[\D]+/g, '');
             value = (value / 100).toFixed(2);
             value = value.replace('.', ',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-            input.value = value;
+            input.value = 'R$ ' + value;
             debounceCalculateTip();
         }
 
