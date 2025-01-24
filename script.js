@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const grossProfitInput = document.getElementById('gross-profit-value');
+    const includeTaxCheckbox = document.getElementById('include-tax');
     const taxValue = document.getElementById('tax-value');
     const netProfitValue = document.getElementById('net-profit-value');
     const managerValue = document.getElementById('manager-value');
@@ -18,14 +19,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function formatBRL(event) {
         let input = event.target;
-        let value = input.value.replace(/[^\d]/g, '');  // Remove everything except digits
+        let value = input.value.replace(/[^\d]/g, '');
 
         if (!value) {
             input.value = '';
             return;
         }
 
-        value = (parseInt(value, 10) / 100).toFixed(2).replace('.', ',');  // Format the value
+        value = (parseInt(value, 10) / 100).toFixed(2).replace('.', ',');
         input.value = `R$ ${value}`;
 
         debounceCalculateTip();
@@ -47,8 +48,12 @@ document.addEventListener('DOMContentLoaded', function() {
             grossProfitError.innerText = "";
         }
 
-        const taxRate = 0.20;
-        const tax = grossProfitValue * taxRate;
+        let tax = 0;
+
+        if (includeTaxCheckbox.checked) {
+            const taxRate = 0.20;
+            tax = grossProfitValue * taxRate;
+        }
 
         taxValue.innerText = tax.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
@@ -60,4 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         managerValue.innerText = managerShare.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         waiterValue.innerText = waiterShare.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     }
+
+    grossProfitInput.addEventListener('keyup', () => debounceCalculateTip());
+    calculateTip();
 });
