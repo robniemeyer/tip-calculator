@@ -19,14 +19,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function formatBRL(event) {
         let input = event.target;
-        let value = input.value.replace(/[^\d]/g, '');  // Remove everything except digits
+        let value = input.value.replace(/[^\d]/g, '');
 
         if (!value) {
             input.value = '';
             return;
         }
 
-        value = (parseInt(value, 10) / 100).toFixed(2).replace('.', ',');  // Format the value
+        value = (parseInt(value, 10) / 100).toFixed(2);
+        value = value.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         input.value = `R$ ${value}`;
 
         debounceCalculateTip();
@@ -38,8 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function calculateTip() {
-        const inputValue = grossProfitInput.value.replace(/[R$ \.,]/g, '');
-        const grossProfitValue = parseFloat(inputValue) / 100;
+        const inputValue = grossProfitInput.value.replace(/[R$ \.]/g, '').replace(',', '.');
+        const grossProfitValue = parseFloat(inputValue);
 
         if (isNaN(grossProfitValue) || grossProfitValue <= 0) {
             grossProfitError.innerText = "Por favor, insira um valor válido de lucro bruto.";
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         let tax = 0;
-        
+
         if (includeTaxCheckbox.checked) {
             const taxRate = 0.20;
             tax = grossProfitValue * taxRate;
