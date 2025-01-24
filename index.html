@@ -16,6 +16,21 @@
             width: 100%;
             box-sizing: border-box;
         }
+        button {
+            font-family: sans-serif;
+            padding: 5px 10px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .loading {
+            font-style: italic;
+            color: gray;
+        }
+        @media only screen and (max-width: 600px) {
+            body {
+                margin: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -25,6 +40,7 @@
         <label for="gross-profit-value">Lucro Bruto:</label>
         <input id="gross-profit-value" type="text" placeholder="Digite o lucro bruto" onkeyup="formatBRL(this)" aria-describedby="gross-profit-input-error"/>
         <div id="gross-profit-input-error" aria-live="assertive"></div>
+        <button onclick="clearInput()">Limpar</button>
     </div>
     <div id="tax">20% Imposto (exceto domingos e feriados): <span id="tax-value">R$ 0,00</span></div>
     <hr/>
@@ -34,6 +50,8 @@
 
     <script>
         let debounceTimer;
+        let isLoading = false;
+
         function debounceCalculateTip() {
             clearTimeout(debounceTimer);
             debounceTimer = setTimeout(calculateTip, 300);
@@ -47,13 +65,35 @@
             debounceCalculateTip();
         }
 
+        function clearInput() {
+            document.getElementById('gross-profit-value').value = '';
+            calculateTip();
+        }
+
+        function showLoading(isLoading) {
+            if (isLoading) {
+                document.getElementById('tax').classList.add('loading');
+                document.getElementById('net-profit').classList.add('loading');
+                document.getElementById('manager').classList.add('loading');
+                document.getElementById('waiter').classList.add('loading');
+            } else {
+                document.getElementById('tax').classList.remove('loading');
+                document.getElementById('net-profit').classList.remove('loading');
+                document.getElementById('manager').classList.remove('loading');
+                document.getElementById('waiter').classList.remove('loading');
+            }
+        }
+
         function calculateTip() {
+            showLoading(true);
+
             const grossProfitInput = document.getElementById('gross-profit-value').value.replace(/[R$ \.]/g, '').replace(',', '.');
             const grossProfitValue = parseFloat(grossProfitInput);
             const grossProfitError = document.getElementById('gross-profit-input-error');
 
             if (isNaN(grossProfitValue) || grossProfitValue <= 0) {
                 grossProfitError.innerText = "Por favor, insira um valor válido de lucro bruto.";
+                showLoading(false);
                 return;
             } else {
                 grossProfitError.innerText = "";
@@ -70,6 +110,8 @@
             const waiterShare = netProfit * 0.90;
             document.getElementById('manager-value').innerText = managerShare.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
             document.getElementById('waiter-value').innerText = waiterShare.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+            showLoading(false);
         }
     </script>
 </body>
