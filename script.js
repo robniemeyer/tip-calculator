@@ -7,13 +7,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const grossProfitError = document.getElementById('gross-profit-input-error');
 
     let debounceTimer;
-    
+
     function debounceCalculateTip() {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(calculateTip, 300);
     }
 
-    grossProfitInput.addEventListener('keyup', debounceCalculateTip);
+    grossProfitInput.addEventListener('keyup', () => formatBRL(grossProfitInput));
 
     function formatBRL(input) {
         let value = input.value.replace(/[\D]+/g, '');
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function calculateTip() {
         const inputValue = grossProfitInput.value.replace(/[R$ \.]/g, '').replace(',', '.');
         const grossProfitValue = parseFloat(inputValue);
-
+        
         if (isNaN(grossProfitValue) || grossProfitValue <= 0) {
             grossProfitError.innerText = "Por favor, insira um valor válido de lucro bruto.";
             return;
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const taxRate = 0.20;
         const tax = grossProfitValue * taxRate;
-
+        
         taxValue.innerText = tax.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
         const netProfit = grossProfitValue - tax;
@@ -54,4 +54,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     grossProfitInput.addEventListener('keyup', debounceCalculateTip);
+    document.getElementById('clear-button').addEventListener('click', clearInput);
 });
