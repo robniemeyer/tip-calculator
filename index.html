@@ -4,38 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Gorjeta</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <header>
-        <h1>Calculadora de Gorjeta</h1>
-    </header>
-    <main>
-        <section id="gross-profit-section">
-            <label for="gross-profit-value">Lucro Bruto:</label>
-            <input id="gross-profit-value" type="text" placeholder="Digite o lucro bruto" onkeyup="formatBRL(this)" aria-describedby="gross-profit-input-error"/>
-            <div id="gross-profit-input-error" aria-live="assertive"></div>
-            <button onclick="clearInput()">Limpar</button>
-        </section>
-        <section id="results">
-            <div id="tax">
-                <p>20% Imposto (exceto domingos e feriados):</p>
-                <span id="tax-value">R$ 0,00</span>
-            </div>
-            <div id="net-profit">
-                <p>Lucro Líquido:</p>
-                <span id="net-profit-value">R$ 0,00</span>
-            </div>
-            <div id="manager">
-                <p>10% Gerente:</p>
-                <span id="manager-value">R$ 0,00</span>
-            </div>
-            <div id="waiter">
-                <p>90% Garçom:</p>
-                <span id="waiter-value">R$ 0,00</span>
-            </div>
-        </section>
-    </main>
+    <h1>Calculadora de Gorjeta</h1>
+    <hr/>
+    <div id="gross-profit" class="flex-container">
+        <label for="gross-profit-value">Lucro Bruto:</label>
+        <input id="gross-profit-value" type="text" placeholder="Digite o lucro bruto" onkeyup="formatBRL(this)" aria-describedby="gross-profit-input-error" />
+        <button onclick="clearInput()">Limpar</button>
+    </div>
+    <div id="tax" class="flex-container">20% Imposto (exceto domingos e feriados): <span id="tax-value">R$ 0,00</span></div>
+    <hr/>
+    <div id="net-profit" class="flex-container">Lucro Líquido: <span id="net-profit-value">R$ 0,00</span></div>
+    <div id="manager" class="flex-container">10% Gerente: <span id="manager-value">R$ 0,00</span></div>
+    <div id="waiter" class="flex-container">90% Garçom: <span id="waiter-value">R$ 0,00</span></div>
+
     <script src="script.js"></script>
 </body>
 </html>
