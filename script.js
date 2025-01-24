@@ -18,10 +18,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function formatBRL(event) {
         let input = event.target;
-        let value = input.value.replace(/[^0-9]/g, '');
+        let value = input.value.replace(/[\D]+/g, ''); 
+
+        if (value === '') {
+            input.value = '';
+            return;
+        }
+
         let formattedValue = (parseInt(value, 10) / 100).toFixed(2).replace('.', ',');
         formattedValue = formattedValue.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
         input.value = `R$ ${formattedValue}`;
+
         debounceCalculateTip();
     }
 
