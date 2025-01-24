@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let debounceTimer;
 
-    grossProfitInput.addEventListener('keyup', () => formatBRL(grossProfitInput));
+    grossProfitInput.addEventListener('input', formatBRL);
     document.getElementById('clear-button').addEventListener('click', clearInput);
 
     function debounceCalculateTip() {
@@ -16,11 +16,12 @@ document.addEventListener('DOMContentLoaded', function() {
         debounceTimer = setTimeout(calculateTip, 300);
     }
 
-    function formatBRL(input) {
-        let value = input.value.replace(/[\D]+/g, '');
-        value = (value / 100).toFixed(2);
-        value = value.replace('.', ',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-        input.value = 'R$ ' + value;
+    function formatBRL(event) {
+        let input = event.target;
+        let value = input.value.replace(/[^0-9]/g, '');
+        let formattedValue = (parseInt(value, 10) / 100).toFixed(2).replace('.', ',');
+        formattedValue = formattedValue.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+        input.value = `R$ ${formattedValue}`;
         debounceCalculateTip();
     }
 
@@ -53,5 +54,4 @@ document.addEventListener('DOMContentLoaded', function() {
         managerValue.innerText = managerShare.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         waiterValue.innerText = waiterShare.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     }
-
 });
