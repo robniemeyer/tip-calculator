@@ -9,16 +9,29 @@
 <body>
     <h1>Calculadora de Gorjeta</h1>
     <hr/>
-    <div id="gross-profit" class="flex-container">
+    <div id="gross-profit" class="input-group">
         <label for="gross-profit-value">Lucro Bruto:</label>
         <input id="gross-profit-value" type="text" placeholder="Digite o lucro bruto" onkeyup="formatBRL(this)" aria-describedby="gross-profit-input-error" />
         <button onclick="clearInput()">Limpar</button>
     </div>
-    <div id="tax" class="flex-container">20% Imposto (exceto domingos e feriados): <span id="tax-value">R$ 0,00</span></div>
+    <div id="gross-profit-input-error" aria-live="assertive"></div>
+    <div class="result-group">
+        <div>20% Imposto (exceto domingos e feriados):</div>
+        <div id="tax-value">R$ 0,00</div>
+    </div>
     <hr/>
-    <div id="net-profit" class="flex-container">Lucro Líquido: <span id="net-profit-value">R$ 0,00</span></div>
-    <div id="manager" class="flex-container">10% Gerente: <span id="manager-value">R$ 0,00</span></div>
-    <div id="waiter" class="flex-container">90% Garçom: <span id="waiter-value">R$ 0,00</span></div>
+    <div class="result-group">
+        <div>Lucro Líquido:</div>
+        <div id="net-profit-value">R$ 0,00</div>
+    </div>
+    <div class="result-group">
+        <div>10% Gerente:</div>
+        <div id="manager-value">R$ 0,00</div>
+    </div>
+    <div class="result-group">
+        <div>90% Garçom:</div>
+        <div id="waiter-value">R$ 0,00</div>
+    </div>
 
     <script src="script.js"></script>
 </body>
