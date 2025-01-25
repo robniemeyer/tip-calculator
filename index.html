@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Gorjeta</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-
 <div class="page-container max-w-md w-full p-6 bg-white shadow-md rounded-lg">
     <header class="text-center mb-6">
         <h1 class="text-2xl font-bold">Calculadora de Gorjeta</h1>
@@ -16,11 +15,11 @@
     <main id="calculator" class="space-y-4">
         <div class="input-group space-y-2">
             <label for="gross-profit-value" class="block text-gray-700">Lucro Bruto:</label>
-            <input id="gross-profit-value" type="text" placeholder="Digite o lucro bruto" onkeyup="formatBRL(this)" aria-describedby="gross-profit-input-error" class="w-full p-2 border rounded-md" />
+            <input id="gross-profit-value" type="text" placeholder="Digite o lucro bruto" onkeyup="formatBRL(this)" aria-describedby="gross-profit-input-error" class="w-full p-2 border rounded-md">
             <div id="gross-profit-input-error" class="text-red-500 text-sm mt-1 hidden" aria-live="assertive"></div>
         </div>
         <div class="checkbox-group flex items-center">
-            <input id="include-tax" type="checkbox" class="mr-2" onchange="calculateTip()" />
+            <input id="include-tax" type="checkbox" class="mr-2" onchange="calculateTip()">
             <label for="include-tax" class="text-gray-700 cursor-pointer">Domingos e feriados</label>
         </div>
         <div class="button-group text-center">
@@ -46,7 +45,6 @@
         </div>
     </main>
 </div>
-
 <script src="script.js"></script>
 </body>
 </html>
