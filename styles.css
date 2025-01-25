@@ -1,5 +1,16 @@
+/* Ensure consistent box-sizing */
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* Error message styling */
+.text-red-500 {
+    color: #e3342f; /* Red for errors */
+}
+
+/* Hide error message initially */
+.hidden {
+    display: none;
 }
