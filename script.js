@@ -44,14 +44,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (isNaN(grossProfitValue) || grossProfitValue <= 0) {
             grossProfitError.innerText = "Por favor, insira um valor válido de lucro bruto.";
+            grossProfitError.classList.remove('hidden');
             return;
         } else {
             grossProfitError.innerText = "";
+            grossProfitError.classList.add('hidden');
         }
 
         let tax = 0;
 
-        if (!includeTaxCheckbox.checked) {
+        if (includeTaxCheckbox.checked) {
             const taxRate = 0.20;
             tax = grossProfitValue * taxRate;
         }
