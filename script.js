@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let tax = 0;
 
-        if (includeTaxCheckbox.checked) {
+        if (!includeTaxCheckbox.checked) {
             const taxRate = 0.20;
             tax = grossProfitValue * taxRate;
         }
