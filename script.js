@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
         managerValue.innerText = managerShare.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         waiterValue.innerText = waiterShare.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     }
-
+    
+    // Ensure initial calculations apply the tax by default
     calculateTip();
 });
